@@ -30,6 +30,18 @@ beforeEach(async () => {
   await blogObject.save()
 })
 
+//sin async/await
+// test("get returns the amount of blogs defined in initialBlogs"), () => {
+//   let cant = 0
+//   const blogs = api.get("/api/blogs").body
+//   blogs.forEach(() => {
+//     cant = cant + 1
+//   })
+//   assert.strictEqual(cant, initialBlogs.length)
+// }
+
+
+//usando async/await
 test("get returns the amount of blogs defined in initialBlogs"), async () => {
   const response = await api.get("/api/notes")
 
