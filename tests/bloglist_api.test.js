@@ -101,6 +101,27 @@ test("when adding a post, undefined likes are defaulted to 0", async () => {
   assert.strictEqual(response.body[2].likes, 0)
 })
 
+test("when adding a post, if title or url is undefined it returns a status code 400"), async () => {
+  const newBlogNoTitle = {
+    "author":"Eze",
+    "url":"noTitleTest"
+  }
+  const newBlogNoURL = {
+    "Title":"No URL test",
+    "author":"Eze"
+  }
+
+  await api
+    .post("/api/blogs")
+    .send(newBlogNoTitle)
+    .expect(400)
+
+  await api
+    .post("/api/blogs")
+    .send(newBlogNoURL)
+    .expect(400)
+}
+
 after(async () => {
   await mongoose.connection.close()
 })
