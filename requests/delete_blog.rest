@@ -1,0 +1,2 @@
+//Tengo que agarrar el id del elemento que quiero borrar mirando la BD
+DELETE http://localhost:3003/api/blogs/67f179c8880a039f497f5a7e

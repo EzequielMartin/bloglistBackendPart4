@@ -1,0 +1,10 @@
+//Tengo que agarrar el id del elemento que quiero actualizar mirando la BD
+PUT http://localhost:3003/api/blogs/67f17c544f2addbda27f07d9
+content-type: application/json
+
+{
+    "title":"Probando el update",
+    "author":"Eze",
+    "url":"eze.com/test",
+    "likes": 90
+}
