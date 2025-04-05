@@ -64,6 +64,25 @@ test("verify id property name", async () => {
   })
 })
 
+test("a valid blog can be added", async () => {
+  const newBlog = {
+    "title":"Probando la insercion de blogs",
+    "author":"Eze",
+    "url":"eze.com/testinsecion",
+    "likes": 42,
+  }
+
+  await api
+    .post("/api/blogs")
+    .send(newBlog)
+    .expect(201)
+    .expect("Content-Type", /application\/json/)
+
+  const response = await api.get("/api/blogs")
+
+  assert.strictEqual(response.body.length, initialBlogs.length + 1)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
