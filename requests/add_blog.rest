@@ -1,9 +1,11 @@
+//Le paso el id del user que tengo en la BD
 POST http://localhost:3003/api/blogs
 content-type: application/json
 
 {
-  "title": "Probando la primer refactorizacion",
+  "title": "Probando blogs con user devuelta",
   "author": "Eze",
-  "url": "eze.com/testrefactor1",
-  "likes": 42
+  "url": "eze.com/blogsconuser2",
+  "likes": 42,
+  "userId": "67f19f9a9c2a27937243a1bc"
 }
