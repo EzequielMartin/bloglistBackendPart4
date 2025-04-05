@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs
+content-type: application/json
+
+{
+  "title": "Probando la primer refactorizacion",
+  "author": "Eze",
+  "url": "eze.com/testrefactor1",
+  "likes": 42
+}
