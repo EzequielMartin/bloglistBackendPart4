@@ -23,7 +23,7 @@ usersRouter.post("/", async (request, response) => {
 usersRouter.get("/", async (request, response) => {
   const users = await User
     .find({}).populate("blogs", { title: 1, author: 1, url: 1, likes: 1 }) //el metodo populate define que los ids que hacen referencia a objetos blog en el campo blogs del documento user seran reemplazados por los documentos blog referenciados
-
+  //Tener en cuenta que la funcionalidad del método populate de Mongoose se basa en el hecho de que hemos definido "tipos" para las referencias en el esquema de Mongoose con la opción ref (mirar el /models/user.js)
   response.json(users)
 })
 
