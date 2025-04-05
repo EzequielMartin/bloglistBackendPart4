@@ -22,7 +22,7 @@ usersRouter.post("/", async (request, response) => {
 
 usersRouter.get("/", async (request, response) => {
   const users = await User
-    .find({}).populate("blogs") //el metodo populate define que los ids que hacen referencia a objetos blog en el campo blogs del documento user seran reemplazados por los documentos blog referenciados
+    .find({}).populate("blogs", { title: 1, author: 1, url: 1, likes: 1 }) //el metodo populate define que los ids que hacen referencia a objetos blog en el campo blogs del documento user seran reemplazados por los documentos blog referenciados
 
   response.json(users)
 })
