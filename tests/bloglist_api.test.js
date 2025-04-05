@@ -1,4 +1,5 @@
-const { test, after } = require("node:test")
+const { test, after, beforeEach } = require("node:test")
+const Blog = require("../models/blogs")
 const assert = require("node:assert")
 const mongoose = require("mongoose")
 const supertest = require("supertest")
@@ -6,10 +7,33 @@ const app = require("../app")
 
 const api = supertest(app)
 
-test("get returns 2 blogs"), async () => {
+const initialBlogs = [
+  {
+    "title":"Probando la app",
+    "author":"Eze",
+    "url":"eze.com/test",
+    "likes": 42
+  },
+  {
+    "title":"Probando la primer refactorizacion",
+    "author":"Eze",
+    "url":"eze.com/testrefactor1",
+    "likes": 42,
+  }
+]
+
+beforeEach(async () => {
+  await Blog.deleteMany({})
+  let blogObject = new Blog(initialBlogs[0])
+  await blogObject.save()
+  blogObject = new Blog(initialBlogs[1])
+  await blogObject.save()
+})
+
+test("get returns the amount of blogs defined in initialBlogs"), async () => {
   const response = await api.get("/api/notes")
 
-  assert.strictEqual(response.body.length, 2)
+  assert.strictEqual(response.body.length, initialBlogs.length)
 
 }
 
