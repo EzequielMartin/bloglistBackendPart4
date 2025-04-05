@@ -83,6 +83,24 @@ test("a valid blog can be added", async () => {
   assert.strictEqual(response.body.length, initialBlogs.length + 1)
 })
 
+test("when adding a post, undefined likes are defaulted to 0", async () => {
+  const newBlog = {
+    "title":"Probando la insercion de blogs sin likes",
+    "author":"Eze",
+    "url":"eze.com/testinsecion"
+  }
+
+  await api
+    .post("/api/blogs")
+    .send(newBlog)
+    .expect(201)
+    .expect("Content-Type", /application\/json/)
+
+  const response = await api.get("/api/blogs")
+
+  assert.strictEqual(response.body[2].likes, 0)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
