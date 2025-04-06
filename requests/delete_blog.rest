@@ -1,2 +1,5 @@
 //Tengo que agarrar el id del elemento que quiero borrar mirando la BD
-DELETE http://localhost:3003/api/blogs/67f179c8880a039f497f5a7e
+//Esto hace que solo se pueda borrar si le paso un token valido
+//Despues tendria que hacer que solo se pueda borrar si el token que le paso es el mismo token que el del usuario que creo el blog
+DELETE http://localhost:3003/api/blogs/67f1c8aa215f7f5f1df41f13
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImV6ZW0iLCJpZCI6IjY3ZjE5ZjlhOWMyYTI3OTM3MjQzYTFiYyIsImlhdCI6MTc0Mzg5NjA5N30.faf4rVwi308Y4tYxFBtoEYeJmVOsU6o_klaY6IX616w

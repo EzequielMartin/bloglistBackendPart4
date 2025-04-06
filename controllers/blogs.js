@@ -23,6 +23,14 @@ blogsRouter.get("/", (request, response) => {
 blogsRouter.post("/", async (request, response) => {
   //let blog = new Blog(request.body)
 
+  //en el body de la request viene el blog que envie como parametro desde add_blog:
+  // {
+  //   "title": "Probando eliminar blog solo con token",
+  //   "author": "Eze",
+  //   "url": "eze.com/eliminarcontoken",
+  //   "likes": 42
+  // }
+
   const body = request.body
 
   const decodedToken = jwt.verify(getTokenFrom(request), config.SECRET)
@@ -62,12 +70,26 @@ blogsRouter.post("/", async (request, response) => {
   response.status(201).json(savedBlog)
 })
 
-blogsRouter.delete("/:id", (request, response) => {
-  Blog.
-    findByIdAndDelete(request.params.id)
-    .then(() => {
-      response.status(204).end()
-    })
+blogsRouter.delete("/:id", async (request, response) => {
+  //con then()
+  // Blog.
+  //   findByIdAndDelete(request.params.id)
+  //   .then(() => {
+  //     response.status(204).end()
+  //   })
+
+  //Para obtener el :id, osea para eliminar el blog del id que quiero, tengo que tomar el id de los parametros de la request, osea request.params.id
+
+  //Esto hace que solo se pueda borrar si le paso un token valido
+  //Despues tendria que hacer que solo se pueda borrar si el token que le paso es el mismo token que el del usuario que creo el blog
+  const decodedToken = jwt.verify(getTokenFrom(request), config.SECRET)
+  if(!decodedToken.id) {
+    return response.status(401).json({ error: "Token invalid" })
+  }
+
+  //Con await/async
+  await Blog.findByIdAndDelete(request.params.id)
+  response.status(204).end()
 })
 
 blogsRouter.put("/:id", (request, response) => {
